@@ -1,0 +1,35 @@
+
+//javascript switch grammer
+
+function greet(lang) {
+    if (lang == 'spanish') {
+        return 'hola';
+    } else if (lang == 'korean') {
+        return 'annohaseio';
+    } else if (lang == 'greek') {
+        return 'giasu';
+    } else if (lang == 'italian') {
+        return 'chao';
+    } else if (lang == 'english') {
+        return 'hello';
+    } else {
+        return 'dont know that one';
+    }
+}
+
+function greet(lang) {
+    switch(lang) {
+        case 'spanish':
+            return 'hola';
+        case 'korean':
+            return 'annohaseio';
+        case 'greek':
+            return 'giasu';
+        case 'italian':
+            return 'chao';
+        case 'english':
+            return 'hello';
+        default:
+            return 'dont know that one':
+    }
+}
