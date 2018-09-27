@@ -1,47 +1,23 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar } from 'react-native';
-import Button from "../Button";
-import { black } from 'ansi-colors';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Timer from './presenter';
+import { actionCreators as tomatoActions } from '../../reducer';
 
-class Timer extends Component {
-    render() {
-        return(
-            <View style={styles.container}> 
-                <StatusBar barStyle={"light-content"} />
-                <View style={styles.upper}> 
-                    <Text style={styles.time}>25:00</Text>
-                </View>
-                <View style={styles.lower}>
-                    <Button iconName="play-circle" onPress={() => alert("it works!")}/>
-                    <Button iconName="stop-circle" onPress={() => alert("it works!")}/>
-                </View>
-            </View>
-        )
-    }
+function mapStateToProps(state) {
+    const {isPlaying, elapsedTime, timerDuration} = state;
+    return {
+        isPlaying,
+        elapsedTime,
+        timerDuration
+    };
 }
-// https://expo.github.io/vector-icons
 
-const styles = StyleSheet.create({
+function mapDispatchToProps(dispatch) {
+    return {
+        startTimer: bindActionCreators(tomatoActions.startTimer, dispatch),
+        restartTimer: bindActionCreators(tomatoActions.restartTimer, dispatch),
+        addSecond: bindActionCreators(tomatoActions.addSecond, dispatch)
+    };
+}
 
-    container: {
-        flex:1,
-        backgroundColor:"#CE0B24"
-    },
-    upper: {
-        flex:2,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    lower: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    time: {
-        color: "white",
-        fontSize: 120,
-        fontWeight: "100"
-    }
-});
-
-export default Timer;
+export default connect(mapStateToProps, mapDispatchToProps)(Timer);
